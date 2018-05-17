@@ -344,10 +344,12 @@ public class PersonnelMgtMain {
    	    Personnel upPersonnel = personnelService.findById(id);
     	ScanUtil.flushScanner();
     	upPersonnel = updateBasicInfo(upPersonnel);
-
+    	Set<Contact> upContact  = new HashSet<Contact>();
     	for(Contact c : upPersonnel.getContact()) {
-			updateContact(c.getContactId());
+			upContact.add(updateContact(c.getContactId()));
     	}
+    	upPersonnel.setContact(upContact);
+
 
     	System.out.println("Available Roles: ");
   		Set<Roles> aRoles = roleService.findAll();
